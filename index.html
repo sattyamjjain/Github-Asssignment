@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+
+<head>
+    <title>IntelliTicks Assignment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body ng-controller="testController">
+    <div class="container">
+        <h1 class="text-center">IntelliTicks Assignment</h1>
+        <form class="form-group text-center">
+            <input type="text" class="form-control" placeholder="Enter a Username" ng-model="username" required>
+            <br>
+            <input type="text" class="form-control" placeholder="Enter a Repository (optional)" ng-model="reponame">
+            <br>
+            <button type="button" class="btn btn-primary" ng-click="getRequestSearch()" ng-model="show">Search</button>
+            <button type="button" class="btn btn-primary" ng-click="getRequestPicked()">Picked
+                Repository</button>
+        </form>
+    </div>
+    <br>
+    <div class="formTable container" ng-hide="!isRepo">
+        <table class="table table-striped" ng-show="show">
+            <thead>
+                <tr>
+                    <th>Checked</th>
+                    <th>Username</th>
+                    <th>RepoName</th>
+                    <th>Forks</th>
+                    <th>Size</th>
+                    <th>Languages</th>
+                    <th>URL Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="datas in dataInfo">
+                    <td>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" ng-model="datas.checked">
+                    </td>
+                    <td>{{datas.owner.login}}</td>
+                    <td>{{datas.name}}</td>
+                    <td>{{datas.forks}}</td>
+                    <td>{{datas.size}}</td>
+                    <td>{{datas.language}}</td>
+                    <td>
+                        <a href="datas.html_url">{{datas.html_url}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-striped" ng-hide="show">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>RepoName</th>
+                    <th>Forks</th>
+                    <th>Size</th>
+                    <th>Languages</th>
+                    <th>URL Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="datas in dataInfo" ng-show="datas.checked">
+                    <td>{{datas.owner.login}}</td>
+                    <td>{{datas.name}}</td>
+                    <td>{{datas.forks}}</td>
+                    <td>{{datas.size}}</td>
+                    <td>{{datas.language}}</td>
+                    <td>
+                        <a href="datas.html_url">{{datas.html_url}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="formTable container" ng-show="isRepos">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>RepoName</th>
+                    <th>Forks</th>
+                    <th>Size</th>
+                    <th>Languages</th>
+                    <th>URL Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{dataInfo.owner.login}}</td>
+                    <td>{{dataInfo.name}}</td>
+                    <td>{{dataInfo.forks}}</td>
+                    <td>{{dataInfo.size}}</td>
+                    <td>{{dataInfo.language}}</td>
+                    <td>
+                        <a href="datas.html_url">{{dataInfo.html_url}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src=" app.js"></script>
+</body>
+
+</html>
